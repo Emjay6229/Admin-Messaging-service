@@ -13,7 +13,7 @@ export class RabbitMQ {
         const { message } = req.body;
     
         try {
-            const channel = await connectToRabbitMQ() as Channel;
+            const channel = await connectToRabbitMQ.connect() as Channel;
             await channel.assertQueue(this.queue, { durable: false });
             channel.sendToQueue(this.queue, Buffer.from(JSON.stringify(message)));
         
@@ -29,7 +29,7 @@ export class RabbitMQ {
 
     async consume(req: Request, res: Response) {
         try {
-            const channel = await connectToRabbitMQ() as Channel;
+            const channel = await connectToRabbitMQ.connect() as Channel;
             await channel.assertQueue(this.queue, { durable: false });
         
             await channel.consume(
