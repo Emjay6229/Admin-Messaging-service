@@ -15,7 +15,7 @@ class App {
         this.app.use(msgroute);
     }
 
-    public start() {
+    start() {
         try {
             this.app.listen(this.port, () => console.log(`Server is running on port ${this.port}`));
         } catch (error: any) { 
